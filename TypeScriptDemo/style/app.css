@@ -1,0 +1,267 @@
+﻿body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #04b29d;
+}
+
+span {
+    font-style: italic;
+}
+
+ul {
+    list-style: circle;
+    background: #00d3d3;
+    color: #fff;
+    font-size: 1.25em;
+    font-weight: 400;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.title {
+    font-size: 2.25em;
+    text-align: center;
+    color: #fff;
+    text-shadow: 2px 2px 5px #000;
+    margin: 0;
+}
+
+.section-header {
+    display: table;
+    margin: 10px auto;    
+    font-size: 1.75em;
+    color: #fff;
+    text-shadow: 2px 2px 5px #000;
+    user-select: none;
+}
+
+.section-header-title {
+    display: inline-block;
+    width: 600px;
+    text-align: center;
+}
+
+.section-header-nav-icon {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.page {
+    display: block;
+}
+
+.page-wrapper {
+    display: block;
+    margin: 0px auto;
+    width: 1024px;    
+    border: 1px solid #000;
+    background: #fff;
+    padding: 20px 10px;
+}
+
+.page-wrapper h2 {
+    margin: 10px 30px;
+    padding: 0px;
+}
+
+.code-header {
+    display: block;
+    font-style: italic;
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 4px;
+}
+
+.code-wrapper {
+    display: inline-block;
+    width: 400px;
+    height: 260px;
+    border: 1px inset;
+    background: #000;
+    padding: 10px;
+    transform: translate3d(0,0,0);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+code {
+    display: block;
+    color: lime;
+    white-space: pre;
+}
+
+@keyframes grind-up {
+    0%   {
+        transform: skew(0deg, 0deg) scaleX(1.0) scaleY(1.0) translate(0px, 0px);
+    }
+
+    100% {
+        transform: skew(45deg, 15deg) scaleX(0) scaleY(0.4) translate(0px, 80px);
+    }
+}
+
+.code-in {
+    transform-origin: right top;
+    transform-style: flat;
+    animation-name: grind-up;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+}
+
+@keyframes spit-out {
+    0%   {
+        transform: skew(45deg, -15deg) scaleX(0) scaleY(0.4) translateY(120px);        
+    }
+
+    100% {
+        transform: skew(0deg, 0deg) scaleX(1.0) scaleY(1.0) translateY(0px);
+    }
+}
+
+.code-out {
+    transform-origin: left top;
+    transform-style: flat;
+    animation-name: spit-out;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+}
+
+@keyframes crank {
+    0% {
+        transform: scaleY(1.0);
+    }
+
+    25% {
+        transform: scaleY(0.1);
+    }
+
+    26% {
+        transform: scaleY(-0.1);
+    }
+
+    50% {
+        transform: scaleY(-1.0);
+    }
+
+    75% {
+        transform: scaleY(-0.1);
+    }
+
+    76% {
+        transform: scaleY(0.1);
+    }
+
+    100% {
+        transform: scaleY(1.0);
+    }
+}
+
+table {
+    margin: 0 auto;
+}
+
+.result-wrapper {
+    display: table;
+    margin: 20px auto 0;
+    padding: 20px;
+    border: 1px solid #dc9b00;
+    background: #fff5cd;
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.8);
+}
+
+.result-wrapper h2 {
+    margin: 0 0 10px 0;
+    padding: 0px;
+}
+
+.result-wrapper input {
+    display: block;
+    margin: 0 auto;
+}
+
+.button-transpile {
+    position: absolute;
+    bottom: 20px;
+    display: block;
+    margin: 0 auto;
+}
+
+.transpile-wrapper {
+    display: block;
+    position: relative;
+    height: 220px;
+}
+
+.img-grinder-handle {
+    background-image: url('../img/meat-grinder-handle.png');
+    background-repeat: no-repeat;
+    background-size: 45px 100px;
+    display: block;
+    width: 45px;
+    height: 100px;
+    position: absolute;
+    top: 14px;
+    left: 0px;
+    cursor: pointer;
+}
+
+.img-grinder-handle.active {
+    animation-name: crank;
+    animation-duration: 0.4s;
+    animation-iteration-count: 5;
+}
+
+.img-grinder-main {
+    background-image: url('../img/meat-grinder-main.png'); 
+    background-repeat: no-repeat;
+    display: block;
+    background-size: 70px 80px;
+    width: 70px;
+    height: 80px;
+    position: absolute;
+    top: 40px;
+    left: 45px;
+}
+
+.page-section {
+    margin: 0px 20px;
+}
+
+.page-section.reading {
+    font-size: 1.5em;
+}
+
+.page-section h2 {
+    margin: 10px 0px 10px 10px;
+    padding: 0px;
+}
+
+.page-section a {
+    text-decoration: none;
+    color: #00d3d3;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.icon-disabled {
+    color: #999;
+    cursor: not-allowed;
+}
+
+.references-section a {
+    display: block;
+    margin: 0 auto;
+    text-decoration: none;
+    color: #333;
+    font-size: 1.25em;
+}
+.references-section ul {
+    background: transparent; 
+}
+
+.references-section ul li {
+    display: list-item;
+    list-style-type: square;   
+    color: #00d3d3; 
+}

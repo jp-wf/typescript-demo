@@ -1,0 +1,30 @@
+{
+  "name": "typescript-demo",
+  "version": "1.0.0",
+  "description": "A simple project to present an overview of the TypeScript language and some related technologies.",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jp-wf/typescript-demo.git"
+  },
+  "keywords": [
+    "TypeScript",
+    "Examples",
+    "Demo",
+    "Programming",
+    "Williams-Forrest"
+  ],
+  "author": "Joshua M Padlaszek",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/jp-wf/typescript-demo/issues"
+  },
+  "homepage": "https://github.com/jp-wf/typescript-demo#readme",
+  "dependencies": {
+    "systemjs": "^0.19.41",
+    "typescript": "^2.1.4"
+  }
+}
