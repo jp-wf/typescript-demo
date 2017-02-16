@@ -42,13 +42,14 @@ export class PageReferences implements IPage {
     }
 
     constructor() {
-        this.source = "pages/references.html";
+        this.source = "/pages/references.html";
         this.name = "References";
         this.description = "A list of references used to put together this presentation";
         this.index = 0;
     }
 
-    run(reverse?: boolean): void {
+    run(callback: Function, reverse?: boolean): void {
+        callback();
     }
 
     forward(): boolean {

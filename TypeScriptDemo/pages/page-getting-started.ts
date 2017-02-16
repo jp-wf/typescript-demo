@@ -1,6 +1,7 @@
 ﻿import { IPage } from "./IPage";
+import { PageHelper } from "./pageHelper";
 
-export class PageWhatIsTypescript implements IPage {
+export class PageGettingStarted implements IPage {
     private _internalIndex: number;
 
     private _source: string;
@@ -44,14 +45,14 @@ export class PageWhatIsTypescript implements IPage {
     }
 
     constructor() {
-        this.source = "/pages/what-is-typescript.html";
-        this.name = "What Is TypeScript?";
-        this.description = "A quick overview of what TypeScript is and how it came to be.";
-        this._internalIndex = 0;
+        this.source = "/pages/getting-started.html";
+        this.name = "Getting Started";
+        this.description = "A quick list of items to get you started working in TypeScript.";
+        this.index = 0;
     }
 
-    run(callback: Function, reverse?: boolean): void {        
-        this._internalIndex = (reverse || 0) ? 1 : 0;
+    run(callback: Function, reverse?: boolean): void {
+        this._internalIndex = (reverse || 0) ? 2 : 0;
         this._setSection();
         callback();
     }
@@ -59,7 +60,8 @@ export class PageWhatIsTypescript implements IPage {
     forward(): boolean {
         this._internalIndex++;
         this._setSection();
-        return this._internalIndex > 1;
+
+        return this._internalIndex > 2;
     }
 
     backward(): boolean {
@@ -77,16 +79,34 @@ export class PageWhatIsTypescript implements IPage {
         return this._internalIndex > 0;
     }
 
+    private _runCreateProject(): void {
+        let createProjectImage: HTMLImageElement = <HTMLImageElement>document.getElementById("img-create-project");
+                
+        PageHelper.wrapImage(createProjectImage);
+    }
+
+    private _runOtherTooling(): void {
+        let npmInstallCommand: HTMLImageElement = <HTMLImageElement>document.getElementById("code-install-npm");
+       
+        PageHelper.addCopyToClipboard(npmInstallCommand);
+    }   
+
     private _setSection() {
         let sections: NodeListOf<Element> = document.querySelectorAll(".page-section");
         for (let i: number = 0; i < sections.length; i++) {
             sections[i].classList.add("hidden");
         }
 
-        if (0 <= this._internalIndex && this._internalIndex <= 1) {
+        if (0 <= this._internalIndex && this._internalIndex <= 2) {
             let currentSection: Element = document.querySelector("#page-section-" + this._internalIndex);
             if (currentSection) {
                 currentSection.classList.remove("hidden");
+            }
+
+            switch (this._internalIndex) {
+                case 1:
+                    this._runOtherTooling();
+                    break;
             }
         }
     }

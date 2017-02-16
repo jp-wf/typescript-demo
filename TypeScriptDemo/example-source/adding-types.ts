@@ -1,6 +1,6 @@
 ﻿namespace AddingTypes {
     export function clickMe(): void {
-        let pageLoaded: Function = (content: string) => {
+        let pageLoaded: Function = (content: string): void => {
             let windowOptions: Array<string> = [
                 "width=640",
                 "height=480",
@@ -12,8 +12,10 @@
                 "status=no",
                 "toolbar=no"
             ];
-            let myWindow: Window = window.open("", "_blank", windowOptions.join(","));
+            let myWindow: Window = window.open(
+                "", "_blank", windowOptions.join(","));            
             myWindow.document.write(content);
+            myWindow.document.title = "Adding Types Example";
         }
 
         let xhr: XMLHttpRequest = new XMLHttpRequest();

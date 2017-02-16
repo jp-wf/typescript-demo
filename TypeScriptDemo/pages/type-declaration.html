@@ -1,32 +1,59 @@
 ﻿<div class="page">
     <div id="page-section-0" class="page-section">
         <h2>Adding Types</h2>
+        <p>
+            The key feature of TypeScript is the ability to decorate objects with Types.  In this example, we create a handler function and an XML Http Request.  When the request loads, the handler is invoked and a new window is opened.  
+            The document content is retrieved and then written to the opened window.  The code below shows types being added to objects as well as types being used to define the signature of the handler function.
+        </p>
         <table cellpadding="0" cellspacing="0">
             <tbody>
                 <tr>
                     <td width="*">
                         <div class="code-header">TypeScript</div>
                         <div class="code-wrapper">
-                            <code id="code-hello-world-source" class="typescript">
+                            <code id="code-adding-types-source" class="typescript">
                             </code>
                         </div>
                     </td>
                     <td width="120">
-                        <div class="transpile-wrapper">
+                        <div class="rainbow-road">
+                            <div class="out-path">
+                                <div class="red"></div>
+                                <div class="orange"></div>
+                                <div class="yellow"></div>
+                                <div class="green"></div>
+                                <div class="blue"></div>
+                                <div class="purple"></div>
+                            </div>
+                            <div class="center-path">
+                                <div class="red"></div>
+                                <div class="orange"></div>
+                                <div class="yellow"></div>
+                                <div class="green"></div>
+                                <div class="blue"></div>
+                                <div class="purple"></div>
+                            </div>
+                            <div class="in-path">
+                                <div class="red"></div>
+                                <div class="orange"></div>
+                                <div class="yellow"></div>
+                                <div class="green"></div>
+                                <div class="blue"></div>
+                                <div class="purple"></div>
+                            </div>
                             <input id="adding-types-transpile" type="button" value="Transpile ->" />
                         </div>
                     </td>
                     <td width="*">
                         <div class="code-header">JavaScript</div>
                         <div class="code-wrapper">
-                            <code id="code-hello-world-compiled" class="javascript">
+                            <code id="code-adding-types-compiled" class="javascript">
                             </code>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <br />
         <br />
         <div id="adding-types-results" class="result-wrapper hidden">
             <h2>Transpiled Functionality</h2>
@@ -35,11 +62,118 @@
     </div>
     <div id="page-section-1" class="page-section">
         <h2>Interfaces</h2>
+        <p>
+            In TypeScript, much as in other object-oriented languages, interfaces allow to the specification of the structure of objects.  This is known as defining the <i>shape</i> of the Type.  Additionally, TypeScript allows for the definition of
+            the signature of Functions as well.  The following example shows some of TypeScript's interface syntax:
+        </p>
+        <table cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td width="*">
+                        <div class="code-header">TypeScript</div>
+                        <div class="code-wrapper">
+                            <code id="code-interfaces-source" class="typescript">
+                            </code>
+                        </div>
+                    </td>
+                    <td width="120">
+                        <div class="transpile-wrapper">
+                            <input id="interfaces-transpile" type="button" value="Transpile ->" />
+                        </div>
+                    </td>
+                    <td width="*">
+                        <div class="code-header">JavaScript</div>
+                        <div class="code-wrapper">
+                            <code id="code-interfaces-compiled" class="javascript">
+                            </code>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div id="page-section-2" class="page-section">
-        <h2>Generics &amp; Casting</h2>
+        <h2>Interfaces - Indexers</h2>
+        <p>
+            TypeScript allows for the definition of indexable types.  This allows you to define dictionary-like interfaces.  Typescript supports indexable types via numeric and string indexers.  However, all indexers are ultimately
+            resolved to strings.  That means defining a number index with a value of 100 is actually stored in the created type as "100".  If both a numeric and string indexer are specified on an interface, the compiler requires that the resulting
+            return types are identical.  The following example shows a simple color array interface which stores key-value pairs of common color names to their corresponding RGB hex value.
+        </p>
+        <table cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td width="*">
+                        <div class="code-header">TypeScript</div>
+                        <div class="code-wrapper">
+                            <code id="code-interface-indexer-source" class="typescript">
+                            </code>
+                        </div>
+                    </td>
+                    <td width="120"></td>
+                    <td width="*">
+                        <div class="code-header">Result</div>
+                        <div id="result-interface-indexer" class="example-interface-indexer-result">
+                            <input id="execute-interface-indexer" class="hidden" type="button" value="Execute Example" onclick="javascript:IndexerExample.execute('result-interface-indexer')" />
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div id="page-section-3" class="page-section">
+        <h2>Generics &amp; Casting</h2>
+        <table cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td width="*">
+                        <div class="code-header">TypeScript</div>
+                        <div class="code-wrapper">
+                            <code id="code-generics-source" class="typescript">
+                            </code>
+                        </div>
+                    </td>
+                    <td width="120">
+                        <div class="transpile-wrapper">
+                            <input id="interfaces-transpile" type="button" value="Transpile ->" />
+                        </div>
+                    </td>
+                    <td width="*">
+                        <div class="code-header">JavaScript</div>
+                        <div class="code-wrapper">
+                            <code id="code-generics-compiled" class="javascript">
+                            </code>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="page-section-4" class="page-section">
         <h2>Unions &amp; Type Guards</h2>
+        <table cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td width="*">
+                        <div class="code-header">TypeScript</div>
+                        <div class="code-wrapper">
+                            <code id="code-unions-source" class="typescript">
+                            </code>
+                        </div>
+                    </td>
+                    <td width="120">
+                        <div class="transpile-wrapper">
+                            <input id="interfaces-transpile" type="button" value="Transpile ->" />
+                        </div>
+                    </td>
+                    <td width="*">
+                        <div class="code-header">JavaScript</div>
+                        <div class="code-wrapper">
+                            <code id="code-unions-compiled" class="javascript">
+                            </code>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

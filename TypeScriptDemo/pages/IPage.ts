@@ -3,7 +3,7 @@
     name: string;
     description: string;
     index: number;
-    run: (reverse?: boolean) => void;
+    run: (callback: Function, reverse?: boolean) => void;
     forward: () => boolean;
     backward: () => boolean;
     canGoForward: () => boolean;

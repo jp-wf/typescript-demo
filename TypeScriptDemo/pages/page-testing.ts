@@ -1,6 +1,7 @@
 ﻿import { IPage } from "./IPage";
+import { PageHelper } from "./pageHelper";
 
-export class PageWhatIsTypescript implements IPage {
+export class PageTesting implements IPage {
     private _internalIndex: number;
 
     private _source: string;
@@ -44,13 +45,13 @@ export class PageWhatIsTypescript implements IPage {
     }
 
     constructor() {
-        this.source = "/pages/what-is-typescript.html";
-        this.name = "What Is TypeScript?";
-        this.description = "A quick overview of what TypeScript is and how it came to be.";
-        this._internalIndex = 0;
+        this.source = "/pages/testing.html";
+        this.name = "Testing";
+        this.description = "An overview on how to test your TypeScript.";
+        this.index = 0;
     }
 
-    run(callback: Function, reverse?: boolean): void {        
+    run(callback: Function, reverse?: boolean): void {
         this._internalIndex = (reverse || 0) ? 1 : 0;
         this._setSection();
         callback();
@@ -59,7 +60,8 @@ export class PageWhatIsTypescript implements IPage {
     forward(): boolean {
         this._internalIndex++;
         this._setSection();
-        return this._internalIndex > 1;
+
+        return this._internalIndex > 4;
     }
 
     backward(): boolean {
@@ -77,16 +79,33 @@ export class PageWhatIsTypescript implements IPage {
         return this._internalIndex > 0;
     }
 
+    private _runSpecRunner(): void {
+        let runner: HTMLIFrameElement = <HTMLIFrameElement>document.querySelector("iframe.jasmine-frame");
+        let reloadIcon = runner.parentElement.querySelector(".reload-icon");
+        reloadIcon.addEventListener("click", () => {
+            runner.contentWindow.location.reload();
+        });        
+    }
+    
     private _setSection() {
         let sections: NodeListOf<Element> = document.querySelectorAll(".page-section");
         for (let i: number = 0; i < sections.length; i++) {
             sections[i].classList.add("hidden");
         }
 
-        if (0 <= this._internalIndex && this._internalIndex <= 1) {
+        if (0 <= this._internalIndex && this._internalIndex <= 4) {
             let currentSection: Element = document.querySelector("#page-section-" + this._internalIndex);
             if (currentSection) {
                 currentSection.classList.remove("hidden");
+            }
+
+            switch (this._internalIndex) {
+                case 0:
+                    this._runSpecRunner();
+                    break;
+                case 2:
+                   // this._runOtherTooling();
+                    break;
             }
         }
     }

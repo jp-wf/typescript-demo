@@ -1,6 +1,7 @@
 ﻿import { IPage } from "./IPage";
+import { PageHelper } from "./pageHelper";
 
-export class PageWhatIsTypescript implements IPage {
+export class PageMyFirstTypescriptApp implements IPage {
     private _internalIndex: number;
 
     private _source: string;
@@ -44,13 +45,13 @@ export class PageWhatIsTypescript implements IPage {
     }
 
     constructor() {
-        this.source = "/pages/what-is-typescript.html";
-        this.name = "What Is TypeScript?";
-        this.description = "A quick overview of what TypeScript is and how it came to be.";
-        this._internalIndex = 0;
+        this.source = "/pages/my-first-typescript-app.html";
+        this.name = "My First TypeScript App";
+        this.description = "A quick walkthrough of creating a simple HTML app using TypeScript.";
+        this.index = 0;
     }
 
-    run(callback: Function, reverse?: boolean): void {        
+    run(callback: Function, reverse?: boolean): void {
         this._internalIndex = (reverse || 0) ? 1 : 0;
         this._setSection();
         callback();
@@ -59,7 +60,8 @@ export class PageWhatIsTypescript implements IPage {
     forward(): boolean {
         this._internalIndex++;
         this._setSection();
-        return this._internalIndex > 1;
+
+        return this._internalIndex > 4;
     }
 
     backward(): boolean {
@@ -77,6 +79,12 @@ export class PageWhatIsTypescript implements IPage {
         return this._internalIndex > 0;
     }
 
+    private _runCreateProject(): void {
+        let createProjectImage: HTMLImageElement = <HTMLImageElement>document.getElementById("img-create-project");
+
+        PageHelper.wrapImage(createProjectImage);
+    }
+
     private _setSection() {
         let sections: NodeListOf<Element> = document.querySelectorAll(".page-section");
         for (let i: number = 0; i < sections.length; i++) {
@@ -87,6 +95,15 @@ export class PageWhatIsTypescript implements IPage {
             let currentSection: Element = document.querySelector("#page-section-" + this._internalIndex);
             if (currentSection) {
                 currentSection.classList.remove("hidden");
+            }
+
+            switch (this._internalIndex) {
+                case 0:
+                    this._runCreateProject();
+                    break;
+                case 2:
+                    // this._runOtherTooling();
+                    break;
             }
         }
     }

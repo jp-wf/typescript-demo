@@ -1,4 +1,5 @@
 ﻿import { IPage } from "./IPage";
+import { PageHelper } from "./pageHelper";
 
 export class PageHelloWorld implements IPage {
     private _internalIndex: number;
@@ -44,17 +45,17 @@ export class PageHelloWorld implements IPage {
     }
 
     constructor() {
-        this.source = "pages/hello-world.html";
+        this.source = "/pages/hello-world.html";
         this.name = "Hello World";
         this.description = "The requisite 'Hello World' example.";
         this.index = 0;                
     }
 
-    run(): void {
+    run(callback: Function): void {
         this._internalIndex = 0;
 
         let xhrSource = new XMLHttpRequest();
-        xhrSource.open("GET", "example-source/hello-world.ts", true);
+        xhrSource.open("GET", "/example-source/hello-world.ts", true);
         xhrSource.responseType = "text";
         xhrSource.onload = function () {
             if (xhrSource.status >= 200 && xhrSource.status < 300) {
@@ -62,12 +63,18 @@ export class PageHelloWorld implements IPage {
                 sourceOutput.innerText = xhrSource.responseText;
                 hljs.highlightBlock(sourceOutput);
             }
+
+            callback();
         };
         xhrSource.send();
 
+        let compiledOutput: HTMLElement = document.getElementById("code-hello-world-compiled");
+        let sourceOutput: HTMLElement = document.getElementById("code-hello-world-source");
+
+        PageHelper.wrapCodeViewer(compiledOutput);
+        PageHelper.wrapCodeViewer(sourceOutput);
+
         let transpile = () => {
-            let compiledOutput: HTMLElement = document.getElementById("code-hello-world-compiled");
-            let sourceOutput: HTMLElement = document.getElementById("code-hello-world-source");
             let grinderHandler: HTMLElement = document.getElementById("grinder-handle");
 
             compiledOutput.classList.remove("code-out");
@@ -75,7 +82,7 @@ export class PageHelloWorld implements IPage {
             grinderHandler.classList.remove("active");
 
             var xhrCompiled = new XMLHttpRequest();
-            xhrCompiled.open("GET", "example-source/hello-world.js", true);
+            xhrCompiled.open("GET", "/example-source/hello-world.js", true);
             xhrCompiled.responseType = "text";
             xhrCompiled.onload = function () {
                 if (xhrCompiled.status >= 200 && xhrCompiled.status < 300) {
@@ -94,7 +101,7 @@ export class PageHelloWorld implements IPage {
             }
 
             let script: HTMLScriptElement = document.createElement("script");
-            script.setAttribute("src", "example-source/hello-world.js");
+            script.setAttribute("src", "/example-source/hello-world.js");
             script.setAttribute("id", "script-hello-world");
             script.onload = () => {
                 let results: HTMLElement = document.getElementById("hello-world-results");

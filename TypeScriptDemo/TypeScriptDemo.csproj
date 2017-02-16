@@ -24,7 +24,14 @@
   <ItemGroup>
     <Content Include="app-loader.js" />
     <Content Include="example-source\aycabtu.html" />
+    <Content Include="img\aycabtu.png" />
+    <Content Include="img\create_typescript_project.png" />
+    <Content Include="img\gulp-text.png" />
+    <Content Include="img\jasmine-logo.png" />
+    <Content Include="pages\getting-started.html" />
+    <Content Include="pages\my-first-typescript-app.html" />
     <Content Include="pages\references.html" />
+    <Content Include="pages\testing.html" />
     <Content Include="pages\type-declaration.html" />
     <Content Include="pages\what-is-typescript.html" />
     <Content Include="style\app.css" />
@@ -35,18 +42,30 @@
     <Content Include="style\highlightjs\agate.css" />
     <Content Include="style\highlightjs\railcasts.css" />
     <Content Include="style\highlightjs\monokai-sublime.css" />
+    <Content Include="testing\spec-runner.html" />
+    <Content Include="testing\test-loader.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="core\page-viewer.spec.ts" />
+    <TypeScriptCompile Include="core\page-viewer.ts" />
     <TypeScriptCompile Include="example-source\adding-types.ts" />
     <TypeScriptCompile Include="example-source\hello-world.ts" />
+    <TypeScriptCompile Include="example-source\interface-function.ts" />
+    <TypeScriptCompile Include="example-source\interface-indexer.ts" />
+    <TypeScriptCompile Include="example-source\interfaces.ts" />
+    <TypeScriptCompile Include="example-source\serpinski.ts" />
     <TypeScriptCompile Include="library-definitions\highlightjs.d.ts" />
     <TypeScriptCompile Include="pages\IPage.ts" />
+    <TypeScriptCompile Include="pages\page-getting-started.ts" />
     <TypeScriptCompile Include="pages\page-hello-world.ts" />
+    <TypeScriptCompile Include="pages\page-my-first-typescript-app.ts" />
     <TypeScriptCompile Include="pages\page-references.ts" />
+    <TypeScriptCompile Include="pages\page-testing.ts" />
     <TypeScriptCompile Include="pages\page-type-declaration.ts" />
     <TypeScriptCompile Include="pages\page-what-is-typescript.ts" />
+    <TypeScriptCompile Include="pages\pageHelper.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="package.json" />
@@ -57,7 +76,9 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="testing\lib\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>

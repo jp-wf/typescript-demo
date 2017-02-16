@@ -1,7 +1,9 @@
 ﻿import { IPage } from "./IPage";
+import { PageHelper } from "./pageHelper";
 
 export class PageTypeDeclaration implements IPage {
     private _internalIndex: number;
+    private _scriptBucket: HTMLElement;
 
     private _source: string;
 
@@ -44,20 +46,23 @@ export class PageTypeDeclaration implements IPage {
     }
 
     constructor() {
-        this.source = "pages/type-declaration.html";
+        this.source = "/pages/type-declaration.html";
         this.name = "Type Declaration";
         this.description = "A section on the core concept within TypeScript, types.";
         this.index = 0;
+
+        this._scriptBucket = document.getElementById("script-bucket");
     }
 
-    run(reverse?: boolean): void {
+    run(callback: Function, reverse?: boolean): void {
         this._internalIndex = (reverse || 0) ? 3 : 0;
         this._setSection();
+        callback();
     }
 
     forward(): boolean {
         this._internalIndex++;
-        this._setSection();
+        this._setSection();        
 
         return this._internalIndex > 3;
     }
@@ -78,6 +83,8 @@ export class PageTypeDeclaration implements IPage {
     }
 
     private _setSection() {
+        this._removeAllResults();
+
         let sections: NodeListOf<Element> = document.querySelectorAll(".page-section");
         for (let i: number = 0; i < sections.length; i++) {
             sections[i].classList.add("hidden");
@@ -94,32 +101,102 @@ export class PageTypeDeclaration implements IPage {
                     this._runAddingTypes();
                     break;
                 case 1:
+                    this._runInterfaces();
                     break;
                 case 2:
+                    this._runIndexers();
                     break;
                 case 3:
-                    break;               
+                    break;
+                case 4:
+                    break;       
+            }
+        }
+    }    
+
+    private _removeAllResults(): void {
+        let allCodeBlocks: NodeListOf<HTMLElement> = document.querySelectorAll("code");
+        if (allCodeBlocks && allCodeBlocks.length > 0) {
+            for (let i: number = 0; i < allCodeBlocks.length; i++) {
+                allCodeBlocks[i].classList.remove("code-in");
+
+                if (allCodeBlocks[i].classList.contains("code-out")) {
+                    allCodeBlocks[i].innerHTML = "";
+                    allCodeBlocks[i].classList.remove("code-out");
+                }                
+            }
+        }
+
+        let results: NodeListOf<Element> = document.querySelectorAll(".result-wrapper");
+        if (results && results.length > 0) {
+            for (let i: number = 0; i < results.length; i++) {
+                results[i].classList.add("hidden");
             }
         }
     }
 
     private _runAddingTypes(): void {
-        let transpile = () => {
-            let compiledOutput: HTMLElement = document.getElementById("code-hello-world-compiled");
-            let sourceOutput: HTMLElement = document.getElementById("code-hello-world-source");
+        let xhrSource = new XMLHttpRequest();
+        xhrSource.open("GET", "example-source/adding-types.ts", true);
+        xhrSource.responseType = "text";
+        xhrSource.onload = function () {
+            if (xhrSource.status >= 200 && xhrSource.status < 300) {
+                let sourceOutput: HTMLElement = document.getElementById("code-adding-types-source");
+                sourceOutput.innerText = xhrSource.responseText;
+                hljs.highlightBlock(sourceOutput);
+            }
+        };
+        xhrSource.send();
 
-            compiledOutput.classList.remove("code-out");
-            sourceOutput.classList.remove("code-in");
+        let compiledOutput: HTMLElement = document.getElementById("code-adding-types-compiled");
+        let sourceOutput: HTMLElement = document.getElementById("code-adding-types-source");
+
+        PageHelper.wrapCodeViewer(compiledOutput);        
+        PageHelper.wrapCodeViewer(sourceOutput);
+        PageHelper.addCopyToClipboard(sourceOutput);
+
+        let transpile = () => {      
+            compiledOutput.classList.remove("rainbow-in");            
+            sourceOutput.classList.remove("rainbow-out");
+
+            var sourceText = sourceOutput.innerText;
+            sourceOutput.innerHTML = '';
+
+            var colorArray = [
+                "red",
+                "orange",
+                "yellow",
+                "green",
+                "blue",
+                "purple"
+            ];
+
+            var outputHTML = '';
+            var lines = sourceText.split('\n');
+            for (let i = 0; i < lines.length; i++) {
+                let cIdx = Math.min(Math.floor(i / 3),5);
+                outputHTML += "<span class=\"rainbow-code " + colorArray[cIdx] + " saturate\">" + lines[i] + "</span>";
+            }
+            sourceOutput.innerHTML = outputHTML;
 
             var xhrCompiled = new XMLHttpRequest();
             xhrCompiled.open("GET", "example-source/adding-types.js", true);
             xhrCompiled.responseType = "text";
             xhrCompiled.onload = function () {
                 if (xhrCompiled.status >= 200 && xhrCompiled.status < 300) {
-                    compiledOutput.innerText = xhrCompiled.responseText;
-                    compiledOutput.classList.add("code-out");
-                    sourceOutput.classList.add("code-in");
-                    hljs.highlightBlock(compiledOutput);
+                    //compiledOutput.innerText = xhrCompiled.responseText;
+
+                    var outputHTML = '';
+                    var lines = sourceText.split('\n');
+                    for (let i = 0; i < lines.length; i++) {
+                        let cIdx = Math.min(Math.floor(i / 3), 5);
+                        outputHTML += "<span style=\"color: " + colorArray[cIdx] + ";\">" + lines[i] + "</span>\n";
+                    }
+                    compiledOutput.innerHTML = outputHTML;
+
+                    compiledOutput.classList.add("rainbow-in");
+                    sourceOutput.classList.add("rainbow-out");
+                   // hljs.highlightBlock(compiledOutput);
                 }
             };
             xhrCompiled.send();
@@ -147,5 +224,81 @@ export class PageTypeDeclaration implements IPage {
                 transpile();
             });
         }
+    }
+
+    private _runInterfaces(): void {
+        let xhrSource = new XMLHttpRequest();
+        xhrSource.open("GET", "example-source/interfaces.ts", true);
+        xhrSource.responseType = "text";
+        xhrSource.onload = function () {
+            if (xhrSource.status >= 200 && xhrSource.status < 300) {
+                let sourceOutput: HTMLElement = document.getElementById("code-interfaces-source");
+                sourceOutput.innerText = xhrSource.responseText;
+                hljs.highlightBlock(sourceOutput);                
+            }
+        };
+        xhrSource.send();
+
+        let compiledOutput: HTMLElement = document.getElementById("code-interfaces-compiled");
+        let sourceOutput: HTMLElement = document.getElementById("code-interfaces-source");
+
+        PageHelper.wrapCodeViewer(compiledOutput);
+        PageHelper.wrapCodeViewer(sourceOutput);
+
+        let transpile = () => {
+            compiledOutput.classList.remove("code-out");
+            sourceOutput.classList.remove("code-in");
+
+            var xhrCompiled = new XMLHttpRequest();
+            xhrCompiled.open("GET", "example-source/interfaces.js", true);
+            xhrCompiled.responseType = "text";
+            xhrCompiled.onload = function () {
+                if (xhrCompiled.status >= 200 && xhrCompiled.status < 300) {
+                    compiledOutput.innerText = xhrCompiled.responseText;
+                    compiledOutput.classList.add("code-out");
+                    sourceOutput.classList.add("code-in");
+                    hljs.highlightBlock(compiledOutput);
+                }
+            };
+            xhrCompiled.send();
+        }
+
+        let transpileButton: HTMLElement = document.getElementById("interfaces-transpile");
+        if (transpileButton) {
+            transpileButton.addEventListener("click", (e) => {
+                transpile();
+            });
+        }
+    }
+
+    private _runIndexers(): void {
+        let xhrSource = new XMLHttpRequest();
+        xhrSource.open("GET", "example-source/interface-indexer.ts", true);
+        xhrSource.responseType = "text";
+        xhrSource.onload = function () {
+            if (xhrSource.status >= 200 && xhrSource.status < 300) {
+                let sourceOutput: HTMLElement = document.getElementById("code-interface-indexer-source");
+                sourceOutput.innerText = xhrSource.responseText;
+                hljs.highlightBlock(sourceOutput);
+                PageHelper.wrapCodeViewer(sourceOutput);
+            }
+        };
+        xhrSource.send();
+
+        let existingScript = document.getElementById("script-interface-indexer");
+        if(existingScript) {
+            existingScript.parentElement.removeChild(existingScript);
+        }
+
+        let script: HTMLScriptElement = document.createElement("script");
+        script.setAttribute("src", "example-source/interface-indexer.js");
+        script.setAttribute("id", "script-interface-indexer");
+        script.onload = () => {
+            let results: HTMLElement = document.getElementById("execute-interface-indexer");
+            if (results) {
+                results.classList.remove("hidden");
+            }
+        }
+        document.body.appendChild(script);
     }
 }

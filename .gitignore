@@ -255,3 +255,5 @@ paket-files/
 **/*.js
 **/*.js.map
 !app-loader.js
+!TypeScriptDemo/testing/**/*
+!TypeScriptDemo/testing/**/*.js
