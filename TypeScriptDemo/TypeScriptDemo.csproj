@@ -24,10 +24,13 @@
   <ItemGroup>
     <Content Include="app-loader.js" />
     <Content Include="example-source\aycabtu.html" />
+    <Content Include="example-source\my-first-typescript-app\index-2.html" />
+    <Content Include="example-source\my-first-typescript-app\index.html" />
     <Content Include="img\aycabtu.png" />
     <Content Include="img\create_typescript_project.png" />
     <Content Include="img\gulp-text.png" />
     <Content Include="img\jasmine-logo.png" />
+    <Content Include="lib\highlightjs\highlight.min.js" />
     <Content Include="pages\getting-started.html" />
     <Content Include="pages\my-first-typescript-app.html" />
     <Content Include="pages\references.html" />
@@ -55,6 +58,9 @@
     <TypeScriptCompile Include="example-source\interface-function.ts" />
     <TypeScriptCompile Include="example-source\interface-indexer.ts" />
     <TypeScriptCompile Include="example-source\interfaces.ts" />
+    <TypeScriptCompile Include="example-source\my-first-typescript-app\app-2.ts" />
+    <TypeScriptCompile Include="example-source\my-first-typescript-app\app-1.ts" />
+    <TypeScriptCompile Include="example-source\my-first-typescript-app\app.ts" />
     <TypeScriptCompile Include="example-source\serpinski.ts" />
     <TypeScriptCompile Include="library-definitions\highlightjs.d.ts" />
     <TypeScriptCompile Include="pages\IPage.ts" />
@@ -69,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="package.json" />
+    <Content Include="example-source\my-first-typescript-app\index-1.html" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

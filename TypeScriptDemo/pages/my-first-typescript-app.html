@@ -1,5 +1,5 @@
 ﻿<div class="page">
-    <div id="page-section-0" class="page-section reading">
+    <div id="page-section-0" class="page-section">
         <h2>Creating a TypeScript Project</h2>
         <p>
             Once you have the base tooling installed, you can make your first TypeScript project.  From within Visual Studio, it's as simple as creating a new project and using the HTML Application
@@ -8,5 +8,89 @@
         <div class="img-wrapper">
             <img id="img-create-project" src="/img/create_typescript_project.png" />
         </div>
+    </div>
+    <div id="page-section-1" class="page-section">
+        <h2>Starting Files</h2>
+        <p>
+            Upon creating the TypeScript project, you will have two very simple files.  App.ts is the code driving the application and index.html is a simple page to load the application.  
+            (There is also an app.css file, but we're going to ignore that for this demonstration.)  The default project simply renders the current date/time to the page.  The pre-existing 
+            functionality isn't very interesting so we're going to improve upon it here.
+        </p>
+        <table cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td width="*">
+                        <div class="code-header">TypeScript - app.ts</div>
+                        <div class="code-wrapper">
+                            <code id="code-app-source" class="typescript">
+                            </code>
+                        </div>
+                    </td>
+                    <td width="120">
+                    </td>
+                    <td width="*">
+                        <div class="code-header">HTML - index.html</div>
+                        <div class="code-wrapper">
+                            <code id="code-index-source" class="html">
+                            </code>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="page-section-2" class="page-section">
+        <h2>Small Modification</h2>
+        <p>
+            The first step is to modify the TypeScript such that the body is empty.   We also defined a new class called triangle which renders a DIV to the screen using the CSS border trick.  
+            One of these triangle objects is instantiated and added to the application.
+        </p>
+        <table cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td width="*">
+                        <div class="code-header">TypeScript - app-1.ts</div>
+                        <div class="code-wrapper">
+                            <code id="code-app1-source" class="typescript">
+                            </code>
+                        </div>
+                    </td>
+                    <td width="120"></td>
+                    <td width="*">
+                        <div class="code-header">Result</div>
+                        <div class="my-first-app-result">
+                            <iframe src="../example-source/my-first-typescript-app/index-1.html"></iframe>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="page-section-3" class="page-section">
+        <h2>Let's Iterate On That...</h2>
+        <p>
+            The first step is to modify the TypeScript such that the body is empty.   We also defined a new class called triangle which renders a DIV to the screen using the CSS border trick.
+            One of these triangle objects is instantiated and added to the application.
+        </p>
+        <table cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td width="*">
+                        <div class="code-header">TypeScript - app-2.ts</div>
+                        <div class="code-wrapper">
+                            <code id="code-app2-source" class="typescript">
+                            </code>
+                        </div>
+                    </td>
+                    <td width="120"></td>
+                    <td width="*">
+                        <div class="code-header">Result</div>
+                        <div class="my-first-app-result">
+                            <iframe src="../example-source/my-first-typescript-app/index-2.html"></iframe>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

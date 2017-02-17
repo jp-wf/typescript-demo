@@ -257,3 +257,5 @@ paket-files/
 !app-loader.js
 !TypeScriptDemo/testing/**/*
 !TypeScriptDemo/testing/**/*.js
+
+!TypeScriptDemo/lib/**/*.js

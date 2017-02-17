@@ -52,7 +52,7 @@ export class PageMyFirstTypescriptApp implements IPage {
     }
 
     run(callback: Function, reverse?: boolean): void {
-        this._internalIndex = (reverse || 0) ? 1 : 0;
+        this._internalIndex = (reverse || 0) ? 4 : 0;
         this._setSection();
         callback();
     }
@@ -85,13 +85,77 @@ export class PageMyFirstTypescriptApp implements IPage {
         PageHelper.wrapImage(createProjectImage);
     }
 
+    private _runStartingFiles(): void {
+        let appSource: HTMLElement = document.getElementById("code-app-source");
+        let indexSource: HTMLElement = document.getElementById("code-index-source");
+
+        let xhrAppSource = new XMLHttpRequest();
+        xhrAppSource.open("GET", "example-source/my-first-typescript-app/app.ts", true);
+        xhrAppSource.responseType = "text";
+        xhrAppSource.onload = function () {
+            if (xhrAppSource.status >= 200 && xhrAppSource.status < 300) {
+                appSource.innerText = xhrAppSource.responseText;
+                hljs.highlightBlock(appSource);
+            }
+        };
+        xhrAppSource.send();
+
+        let xhrIndexSource = new XMLHttpRequest();
+        xhrIndexSource.open("GET", "example-source/my-first-typescript-app/index.html", true);
+        xhrIndexSource.responseType = "text";
+        xhrIndexSource.onload = function () {
+            if (xhrIndexSource.status >= 200 && xhrAppSource.status < 300) {
+                indexSource.innerText = xhrIndexSource.responseText;
+                hljs.highlightBlock(indexSource);
+            }
+        };
+        xhrIndexSource.send();
+       
+        PageHelper.wrapCodeViewer(appSource);
+        PageHelper.wrapCodeViewer(indexSource);
+    }
+
+    private _runStepOne(): void {
+        let appSource: HTMLElement = document.getElementById("code-app1-source");
+
+        let xhrAppSource = new XMLHttpRequest();
+        xhrAppSource.open("GET", "example-source/my-first-typescript-app/app-1.ts", true);
+        xhrAppSource.responseType = "text";
+        xhrAppSource.onload = function () {
+            if (xhrAppSource.status >= 200 && xhrAppSource.status < 300) {
+                appSource.innerText = xhrAppSource.responseText;
+                hljs.highlightBlock(appSource);
+            }
+        };
+        xhrAppSource.send();
+
+        PageHelper.wrapCodeViewer(appSource);
+    }
+
+    private _runStepTwo(): void {
+        let appSource: HTMLElement = document.getElementById("code-app2-source");
+
+        let xhrAppSource = new XMLHttpRequest();
+        xhrAppSource.open("GET", "example-source/my-first-typescript-app/app-2.ts", true);
+        xhrAppSource.responseType = "text";
+        xhrAppSource.onload = function () {
+            if (xhrAppSource.status >= 200 && xhrAppSource.status < 300) {
+                appSource.innerText = xhrAppSource.responseText;
+                hljs.highlightBlock(appSource);
+            }
+        };
+        xhrAppSource.send();
+
+        PageHelper.wrapCodeViewer(appSource);
+    }
+
     private _setSection() {
         let sections: NodeListOf<Element> = document.querySelectorAll(".page-section");
         for (let i: number = 0; i < sections.length; i++) {
             sections[i].classList.add("hidden");
         }
 
-        if (0 <= this._internalIndex && this._internalIndex <= 1) {
+        if (0 <= this._internalIndex && this._internalIndex <= 4) {
             let currentSection: Element = document.querySelector("#page-section-" + this._internalIndex);
             if (currentSection) {
                 currentSection.classList.remove("hidden");
@@ -101,8 +165,14 @@ export class PageMyFirstTypescriptApp implements IPage {
                 case 0:
                     this._runCreateProject();
                     break;
+                case 1:
+                    this._runStartingFiles();
+                    break;
                 case 2:
-                    // this._runOtherTooling();
+                    this._runStepOne();
+                    break;
+                case 3:
+                    this._runStepTwo();
                     break;
             }
         }
