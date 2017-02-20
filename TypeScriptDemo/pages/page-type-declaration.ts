@@ -55,7 +55,7 @@ export class PageTypeDeclaration implements IPage {
     }
 
     run(callback: Function, reverse?: boolean): void {
-        this._internalIndex = (reverse || 0) ? 3 : 0;
+        this._internalIndex = (reverse || 0) ? 4 : 0;
         this._setSection();
         callback();
     }
@@ -64,7 +64,7 @@ export class PageTypeDeclaration implements IPage {
         this._internalIndex++;
         this._setSection();        
 
-        return this._internalIndex > 3;
+        return this._internalIndex > 4;
     }
 
     backward(): boolean {
@@ -90,7 +90,7 @@ export class PageTypeDeclaration implements IPage {
             sections[i].classList.add("hidden");
         }
 
-        if (0 <= this._internalIndex && this._internalIndex <= 3) {
+        if (0 <= this._internalIndex && this._internalIndex <= 4) {
             let currentSection: Element = document.querySelector("#page-section-" + this._internalIndex);
             if (currentSection) {
                 currentSection.classList.remove("hidden");
@@ -107,8 +107,10 @@ export class PageTypeDeclaration implements IPage {
                     this._runIndexers();
                     break;
                 case 3:
+                    this._runClasses();
                     break;
                 case 4:
+                    this._runGenerics();
                     break;       
             }
         }
@@ -295,6 +297,68 @@ export class PageTypeDeclaration implements IPage {
         script.setAttribute("id", "script-interface-indexer");
         script.onload = () => {
             let results: HTMLElement = document.getElementById("execute-interface-indexer");
+            if (results) {
+                results.classList.remove("hidden");
+            }
+        }
+        document.body.appendChild(script);
+    }
+
+    private _runClasses(): void {
+        let xhrSource = new XMLHttpRequest();
+        xhrSource.open("GET", "example-source/classes-and-inheritance.ts", true);
+        xhrSource.responseType = "text";
+        xhrSource.onload = function () {
+            if (xhrSource.status >= 200 && xhrSource.status < 300) {
+                let sourceOutput: HTMLElement = document.getElementById("code-classes-source");
+                sourceOutput.innerText = xhrSource.responseText;
+                hljs.highlightBlock(sourceOutput);
+                PageHelper.wrapCodeViewer(sourceOutput);
+            }
+        };
+        xhrSource.send();
+
+        let existingScript = document.getElementById("script-classes");
+        if (existingScript) {
+            existingScript.parentElement.removeChild(existingScript);
+        }
+
+        let script: HTMLScriptElement = document.createElement("script");
+        script.setAttribute("src", "example-source/classes-and-inheritance.js");
+        script.setAttribute("id", "script-classes");
+        script.onload = () => {
+            let results: HTMLElement = document.getElementById("execute-classes");
+            if (results) {
+                results.classList.remove("hidden");
+            }
+        }
+        document.body.appendChild(script);
+    }
+
+    private _runGenerics(): void {
+        let xhrSource = new XMLHttpRequest();
+        xhrSource.open("GET", "example-source/generics-and-casting.ts", true);
+        xhrSource.responseType = "text";
+        xhrSource.onload = function () {
+            if (xhrSource.status >= 200 && xhrSource.status < 300) {
+                let sourceOutput: HTMLElement = document.getElementById("code-generics-source");
+                sourceOutput.innerText = xhrSource.responseText;
+                hljs.highlightBlock(sourceOutput);
+                PageHelper.wrapCodeViewer(sourceOutput);
+            }
+        };
+        xhrSource.send();
+
+        let existingScript = document.getElementById("script-generics");
+        if (existingScript) {
+            existingScript.parentElement.removeChild(existingScript);
+        }
+
+        let script: HTMLScriptElement = document.createElement("script");
+        script.setAttribute("src", "example-source/generics-and-casting.js");
+        script.setAttribute("id", "script-generics");
+        script.onload = () => {
+            let results: HTMLElement = document.getElementById("execute-generics");
             if (results) {
                 results.classList.remove("hidden");
             }
