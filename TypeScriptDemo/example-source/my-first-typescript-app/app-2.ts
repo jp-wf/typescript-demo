@@ -28,24 +28,38 @@
             if (this._iteration > 6) {
                 let total: number = 0;
                 for (let i: number = 0; i < this._iteration; i++) { total += Math.pow(3, i); }
-                alert("There are already " + total + " triangles on the screen.  Iterating again might not be a good idea.");
+                alert("There are already " + total +
+                    " triangles on the screen.  Iterating again might not be a good idea.");
                 this._iteration--;
                 return;
             } else if (this._iteration == -1) {
-                let t: Triangle = new Triangle(document.body, document.body.clientWidth / 2, document.body.clientHeight / 2 + 10, 120);
+                let t: Triangle = new Triangle(
+                    document.body,
+                    document.body.clientWidth / 2,
+                    document.body.clientHeight / 2 + 10,
+                    120);
             } else if (iteration == 0) {
                 let t: Triangle = new Triangle(document.body, x, y, size, true);
             } else {
                 for (let i: number = iteration; i > 0; i--) {
                     for (let j: number = 0; j < 3; j++) {
-                        this._renderIteration(i - 1, x + (j - 1) * size, (j == 1 ? y - 1.5 * size : y + 0.5 * size), size / 2);
+                        this._renderIteration(
+                            i - 1, // iteration count
+                            x + (j - 1) * size, // x position
+                            (j == 1 ? y - 1.5 * size : y + 0.5 * size), // y position
+                            size / 2); // render size
                     }
                 }
             }
         }
 
         go(): void {
-            this._renderIteration(this._iteration++, document.body.clientWidth / 2, (document.body.clientHeight / 2) + 60 + 10, 60);
+            this._renderIteration(
+                this._iteration,
+                document.body.clientWidth / 2,
+                (document.body.clientHeight / 2) + 60 + 10,
+                60);
+            this._iteration++;
         }
     }
 

@@ -69,8 +69,9 @@
     <div id="page-section-3" class="page-section">
         <h2>Let's Iterate On That...</h2>
         <p>
-            The first step is to modify the TypeScript such that the body is empty.   We also defined a new class called triangle which renders a DIV to the screen using the CSS border trick.
-            One of these triangle objects is instantiated and added to the application.
+            Now to make this more interesting we'll add some recursive functionality to this example.  First, an private variable of type number is added to the MyFirstApp class.  Next, instead of "Go!" just calling a Triangle constructor, it now calls a recursive function.
+            The first iteration of this function creates the triangle we saw in the previous example.  Subsequent iterations create new subtraction triangles.  These triangles are supported by a new optional parameters that was added to the Triangle class constructor.  If it
+            is set to true, the triangle is rendered downwards in the color of the background.
         </p>
         <table cellpadding="0" cellspacing="0">
             <tbody>
