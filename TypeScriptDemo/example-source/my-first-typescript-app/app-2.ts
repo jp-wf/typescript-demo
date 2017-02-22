@@ -75,7 +75,7 @@
             if (subtract) {
                 triangle.style.borderTop = 2 * size + "px solid #333";
             } else {
-                triangle.style.borderBottom = 2 * size + "px solid #33ff33";
+                triangle.style.borderBottom = 2 * size + "px solid #ff0";
             }
 
             triangle.style.transform = "translate(-50%, -50%)";

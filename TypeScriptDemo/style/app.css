@@ -699,21 +699,105 @@ table {
 
 .field-container {
     display: block;
-    position: relative;
-    width: 800px;
-    height: 200px;
+    position: absolute;
+    width: 960px;
+    height: 550px;
+    background: #00d3d3;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
 }
 
 .field-grass {
-
+    display: block;
+    width: 100%;
+    height: 250px;
+    background: #30a125;
+    border-top: 3px solid #197020;
+    position: absolute;
+    left: 0;
+    bottom: 0;
 }
 
-.field-fence {
+.field-fence-top {
+    display: block;
+    height: 20px;
+    background: saddlebrown;
+    box-shadow: rgba(0,0,0,0.8) 0px 0px 5px inset;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 100px;
+    z-index: 500;
+}
 
+.field-fence-bottom {
+    display: block;
+    background: saddlebrown;
+    height: 20px;
+    box-shadow: rgba(0,0,0,0.8) 0px 0px 5px inset;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 50px;
+    z-index: 500;
+}
+
+.field-fence-post {
+    display: block;
+    background: saddlebrown;
+    box-shadow: rgba(0,0,0,0.8) 0px 0px 5px inset;
+    height: 125px;
+    width: 30px;
+    position: absolute;
+    left: -15px;
+    bottom: 0px;
+    z-index: 501;    
+}
+
+
+.field-fence-post.two {
+    left: 225px; 
+}
+
+.field-fence-post.three {
+    left: 465px; 
+}
+
+.field-fence-post.four {
+    left: 705px; 
+}
+
+.field-fence-post.five {
+    left: 945px; 
 }
 
 .sheep {
-    background: url(img/sheep.png);
+    margin: 0;
+    padding: 0;
+    width: 160px;
+    height: 120px;
+    display: block;
+    position: absolute;
+}
+
+.sheep .content {
+    background: url(../img/sheep.png);
+    background-size: 160px 120px;
+    background-repeat: no-repeat;
+    width: 160px;
+    height: 120px;
+    display: block;
+    transform: scaleX(-1);
+}
+
+.sheep .content.reverse {
+    transform: scaleX(1);
+}
+
+.pig {
+    background: url(../img/pig.png);
     background-size: 80px 60px;
     background-repeat: no-repeat;
     width: 80px;
@@ -722,10 +806,52 @@ table {
     position: absolute;
 }
 
-.cow {
-
+.wolf {
+    background: url(../img/sheep.png);
+    background-size: 80px 60px;
+    background-repeat: no-repeat;
+    width: 80px;
+    height: 60px;
+    display: block;
+    position: absolute;
 }
 
-.wolf {
+.animal-move {
+    display: block;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    font-size: 20em;
+    text-align: center;
+    color: #fff;
+    text-shadow: 2px 2px 2px #000;
+    margin: 0;
+    cursor: pointer;
+}
 
+.animal-move.left {
+    left: -5px;
+}
+
+.animal-move.right {
+    right: -5px;
+}
+
+.call-bubble {
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    background: #feb;
+    color: #333;
+    display: inline-block;    
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    transform: translateX(-50%);
+}
+
+.call-bubble.reverse {
+    left: -30px;
+    right: unset;
+    transform: translateX(50%);
 }

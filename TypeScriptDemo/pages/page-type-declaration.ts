@@ -305,6 +305,8 @@ export class PageTypeDeclaration implements IPage {
     }
 
     private _runClasses(): void {
+        let classesResult = document.getElementById("classes-result");
+
         let xhrSource = new XMLHttpRequest();
         xhrSource.open("GET", "example-source/classes-and-inheritance.ts", true);
         xhrSource.responseType = "text";
@@ -313,7 +315,7 @@ export class PageTypeDeclaration implements IPage {
                 let sourceOutput: HTMLElement = document.getElementById("code-classes-source");
                 sourceOutput.innerText = xhrSource.responseText;
                 hljs.highlightBlock(sourceOutput);
-                PageHelper.wrapCodeViewer(sourceOutput);
+                PageHelper.wrapCodeViewer(sourceOutput);                                
             }
         };
         xhrSource.send();
@@ -327,15 +329,15 @@ export class PageTypeDeclaration implements IPage {
         script.setAttribute("src", "example-source/classes-and-inheritance.js");
         script.setAttribute("id", "script-classes");
         script.onload = () => {
-            let results: HTMLElement = document.getElementById("execute-classes");
-            if (results) {
-                results.classList.remove("hidden");
-            }
+            PageHelper.wrapCodeViewer(classesResult);
+            ClassesExample.execute("classes-field");
         }
         document.body.appendChild(script);
     }
 
     private _runGenerics(): void {
+        let genericsResult = document.getElementById("generics-result");
+
         let xhrSource = new XMLHttpRequest();
         xhrSource.open("GET", "example-source/generics-and-casting.ts", true);
         xhrSource.responseType = "text";
@@ -358,10 +360,8 @@ export class PageTypeDeclaration implements IPage {
         script.setAttribute("src", "example-source/generics-and-casting.js");
         script.setAttribute("id", "script-generics");
         script.onload = () => {
-            let results: HTMLElement = document.getElementById("execute-generics");
-            if (results) {
-                results.classList.remove("hidden");
-            }
+            PageHelper.wrapCodeViewer(genericsResult);
+            GenericsExample.execute("generics-field");
         }
         document.body.appendChild(script);
     }
