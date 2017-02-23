@@ -52,7 +52,7 @@ export class PageMyFirstTypescriptApp implements IPage {
     }
 
     run(callback: Function, reverse?: boolean): void {
-        this._internalIndex = (reverse || 0) ? 4 : 0;
+        this._internalIndex = (reverse || 0) ? 3 : 0;
         this._setSection();
         callback();
     }
@@ -61,7 +61,7 @@ export class PageMyFirstTypescriptApp implements IPage {
         this._internalIndex++;
         this._setSection();
 
-        return this._internalIndex > 4;
+        return this._internalIndex > 3;
     }
 
     backward(): boolean {
@@ -96,6 +96,7 @@ export class PageMyFirstTypescriptApp implements IPage {
             if (xhrAppSource.status >= 200 && xhrAppSource.status < 300) {
                 appSource.innerText = xhrAppSource.responseText;
                 hljs.highlightBlock(appSource);
+                PageHelper.addCopyToClipboard(appSource);
             }
         };
         xhrAppSource.send();
@@ -107,6 +108,7 @@ export class PageMyFirstTypescriptApp implements IPage {
             if (xhrIndexSource.status >= 200 && xhrAppSource.status < 300) {
                 indexSource.innerText = xhrIndexSource.responseText;
                 hljs.highlightBlock(indexSource);
+                PageHelper.addCopyToClipboard(indexSource);
             }
         };
         xhrIndexSource.send();
@@ -125,6 +127,7 @@ export class PageMyFirstTypescriptApp implements IPage {
             if (xhrAppSource.status >= 200 && xhrAppSource.status < 300) {
                 appSource.innerText = xhrAppSource.responseText;
                 hljs.highlightBlock(appSource);
+                PageHelper.addCopyToClipboard(appSource);
             }
         };
         xhrAppSource.send();
@@ -142,6 +145,7 @@ export class PageMyFirstTypescriptApp implements IPage {
             if (xhrAppSource.status >= 200 && xhrAppSource.status < 300) {
                 appSource.innerText = xhrAppSource.responseText;
                 hljs.highlightBlock(appSource);
+                PageHelper.addCopyToClipboard(appSource);
             }
         };
         xhrAppSource.send();
@@ -155,7 +159,7 @@ export class PageMyFirstTypescriptApp implements IPage {
             sections[i].classList.add("hidden");
         }
 
-        if (0 <= this._internalIndex && this._internalIndex <= 4) {
+        if (0 <= this._internalIndex && this._internalIndex <= 3) {
             let currentSection: Element = document.querySelector("#page-section-" + this._internalIndex);
             if (currentSection) {
                 currentSection.classList.remove("hidden");

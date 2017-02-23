@@ -139,7 +139,7 @@ export class PageTypeDeclaration implements IPage {
 
     private _runAddingTypes(): void {
         let xhrSource = new XMLHttpRequest();
-        xhrSource.open("GET", "example-source/adding-types.ts", true);
+        xhrSource.open("GET", "/example-source/adding-types.ts", true);
         xhrSource.responseType = "text";
         xhrSource.onload = function () {
             if (xhrSource.status >= 200 && xhrSource.status < 300) {
@@ -182,7 +182,7 @@ export class PageTypeDeclaration implements IPage {
             sourceOutput.innerHTML = outputHTML;
 
             var xhrCompiled = new XMLHttpRequest();
-            xhrCompiled.open("GET", "example-source/adding-types.js", true);
+            xhrCompiled.open("GET", "/example-source/adding-types.js", true);
             xhrCompiled.responseType = "text";
             xhrCompiled.onload = function () {
                 if (xhrCompiled.status >= 200 && xhrCompiled.status < 300) {
@@ -209,7 +209,7 @@ export class PageTypeDeclaration implements IPage {
             }
 
             let script: HTMLScriptElement = document.createElement("script");
-            script.setAttribute("src", "example-source/adding-types.js");
+            script.setAttribute("src", "/example-source/adding-types.js");
             script.setAttribute("id", "script-adding-types");
             script.onload = () => {
                 let results: HTMLElement = document.getElementById("adding-types-results");
@@ -230,7 +230,7 @@ export class PageTypeDeclaration implements IPage {
 
     private _runInterfaces(): void {
         let xhrSource = new XMLHttpRequest();
-        xhrSource.open("GET", "example-source/interfaces.ts", true);
+        xhrSource.open("GET", "/example-source/interfaces.ts", true);
         xhrSource.responseType = "text";
         xhrSource.onload = function () {
             if (xhrSource.status >= 200 && xhrSource.status < 300) {
@@ -246,13 +246,14 @@ export class PageTypeDeclaration implements IPage {
 
         PageHelper.wrapCodeViewer(compiledOutput);
         PageHelper.wrapCodeViewer(sourceOutput);
+        PageHelper.addCopyToClipboard(sourceOutput);
 
         let transpile = () => {
             compiledOutput.classList.remove("code-out");
             sourceOutput.classList.remove("code-in");
 
             var xhrCompiled = new XMLHttpRequest();
-            xhrCompiled.open("GET", "example-source/interfaces.js", true);
+            xhrCompiled.open("GET", "/example-source/interfaces.js", true);
             xhrCompiled.responseType = "text";
             xhrCompiled.onload = function () {
                 if (xhrCompiled.status >= 200 && xhrCompiled.status < 300) {
@@ -275,7 +276,7 @@ export class PageTypeDeclaration implements IPage {
 
     private _runIndexers(): void {
         let xhrSource = new XMLHttpRequest();
-        xhrSource.open("GET", "example-source/interface-indexer.ts", true);
+        xhrSource.open("GET", "/example-source/interface-indexer.ts", true);
         xhrSource.responseType = "text";
         xhrSource.onload = function () {
             if (xhrSource.status >= 200 && xhrSource.status < 300) {
@@ -283,6 +284,7 @@ export class PageTypeDeclaration implements IPage {
                 sourceOutput.innerText = xhrSource.responseText;
                 hljs.highlightBlock(sourceOutput);
                 PageHelper.wrapCodeViewer(sourceOutput);
+                PageHelper.addCopyToClipboard(sourceOutput);
             }
         };
         xhrSource.send();
@@ -293,7 +295,7 @@ export class PageTypeDeclaration implements IPage {
         }
 
         let script: HTMLScriptElement = document.createElement("script");
-        script.setAttribute("src", "example-source/interface-indexer.js");
+        script.setAttribute("src", "/example-source/interface-indexer.js");
         script.setAttribute("id", "script-interface-indexer");
         script.onload = () => {
             let results: HTMLElement = document.getElementById("execute-interface-indexer");
@@ -308,14 +310,15 @@ export class PageTypeDeclaration implements IPage {
         let classesResult = document.getElementById("classes-result");
 
         let xhrSource = new XMLHttpRequest();
-        xhrSource.open("GET", "example-source/classes-and-inheritance.ts", true);
+        xhrSource.open("GET", "/example-source/classes-and-inheritance.ts", true);
         xhrSource.responseType = "text";
         xhrSource.onload = function () {
             if (xhrSource.status >= 200 && xhrSource.status < 300) {
                 let sourceOutput: HTMLElement = document.getElementById("code-classes-source");
                 sourceOutput.innerText = xhrSource.responseText;
                 hljs.highlightBlock(sourceOutput);
-                PageHelper.wrapCodeViewer(sourceOutput);                                
+                PageHelper.wrapCodeViewer(sourceOutput);
+                PageHelper.addCopyToClipboard(sourceOutput);                            
             }
         };
         xhrSource.send();
@@ -326,7 +329,7 @@ export class PageTypeDeclaration implements IPage {
         }
 
         let script: HTMLScriptElement = document.createElement("script");
-        script.setAttribute("src", "example-source/classes-and-inheritance.js");
+        script.setAttribute("src", "/example-source/classes-and-inheritance.js");
         script.setAttribute("id", "script-classes");
         script.onload = () => {
             PageHelper.wrapCodeViewer(classesResult);
@@ -339,7 +342,7 @@ export class PageTypeDeclaration implements IPage {
         let genericsResult = document.getElementById("generics-result");
 
         let xhrSource = new XMLHttpRequest();
-        xhrSource.open("GET", "example-source/generics-and-casting.ts", true);
+        xhrSource.open("GET", "/example-source/generics-and-casting.ts", true);
         xhrSource.responseType = "text";
         xhrSource.onload = function () {
             if (xhrSource.status >= 200 && xhrSource.status < 300) {
@@ -347,6 +350,7 @@ export class PageTypeDeclaration implements IPage {
                 sourceOutput.innerText = xhrSource.responseText;
                 hljs.highlightBlock(sourceOutput);
                 PageHelper.wrapCodeViewer(sourceOutput);
+                PageHelper.addCopyToClipboard(sourceOutput);
             }
         };
         xhrSource.send();
@@ -357,11 +361,11 @@ export class PageTypeDeclaration implements IPage {
         }
 
         let script: HTMLScriptElement = document.createElement("script");
-        script.setAttribute("src", "example-source/generics-and-casting.js");
+        script.setAttribute("src", "/example-source/generics-and-casting.js");
         script.setAttribute("id", "script-generics");
         script.onload = () => {
             PageHelper.wrapCodeViewer(genericsResult);
-            GenericsExample.execute("generics-field");
+            GenericsExample.execute();
         }
         document.body.appendChild(script);
     }

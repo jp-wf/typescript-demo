@@ -88,6 +88,10 @@ ul {
 
 }
 
+.code-wrapper.full {
+    width: 940px;
+}
+
 .code-wrapper.modal {
     position: fixed;
     z-index: 100;
@@ -568,13 +572,32 @@ table {
     display: block;
 }
 
-.copy-notification {
+.copy-anchor {
     display: block;
+    top: 5px;
+    right: 5px;
+    position: absolute;
+    color: #fff;
+    z-index: 5;
+    cursor: pointer;
+}
+
+.code-wrapper.modal .copy-anchor {
+    display: block;
+    top: 60px;
+    right: 80px;
+    position: absolute;
+    color: #fff;
+    z-index: 5;
+    font-size: 1.5em;
+}
+
+.copy-notification {
+    display: inline-block;
     opacity: 1;
     position: absolute;
-    left: calc(100% - 10px);
-    top: -1.5em;
-    transform: translateX(-100%);
+    right: 1.75em;
+    top: 0px;
     padding: 5px 10px;
     border-radius: 5px; 
     white-space: nowrap;
@@ -895,4 +918,60 @@ table {
     left: -30px;
     right: unset;
     transform: translateX(50%) translateY(-50%);
+}
+
+.result-canvas {
+    display: block;
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    z-index: -1;
+}
+
+.draw-toolbar {
+    position: absolute;
+    background: #555;
+    border: 2px outset;
+    display: inline-block;
+    bottom: 0;
+    left: 50%;
+    height: 48px;
+    transform: translateX(-50%);
+}
+
+.draw-tool-icon {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    background-repeat: no-repeat;
+    background-size: 48px 48px;
+}
+
+.pencil {
+    background-image: url(/img/pencil.png);
+}
+
+.pencil.active {
+    background-image: url(/img/pencil-active.png);
+}
+
+.brush {
+    background-image: url(/img/brush.png);
+}
+
+.brush.active {
+    background-image: url(/img/brush-active.png);
+}
+
+.eraser {
+    background-image: url(/img/eraser.png);
+}
+
+.eraser.active {
+    background-image: url(/img/eraser-active.png);
 }

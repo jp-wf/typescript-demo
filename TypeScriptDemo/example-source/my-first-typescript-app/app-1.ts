@@ -20,7 +20,11 @@
         }
 
         go(): void {
-            let t: Triangle = new Triangle(document.body, document.body.clientWidth / 2, document.body.clientHeight / 2 + 10, 120);
+            let t: Triangle = new Triangle(
+                document.body,
+                document.body.clientWidth / 2,
+                document.body.clientHeight / 2 + 10,
+                120);
         }
     }
 

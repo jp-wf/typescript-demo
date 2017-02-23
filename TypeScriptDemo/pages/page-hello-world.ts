@@ -61,7 +61,7 @@ export class PageHelloWorld implements IPage {
             if (xhrSource.status >= 200 && xhrSource.status < 300) {
                 let sourceOutput: HTMLElement = document.getElementById("code-hello-world-source");
                 sourceOutput.innerText = xhrSource.responseText;
-                hljs.highlightBlock(sourceOutput);
+                hljs.highlightBlock(sourceOutput);                
             }
 
             callback();
@@ -73,6 +73,7 @@ export class PageHelloWorld implements IPage {
 
         PageHelper.wrapCodeViewer(compiledOutput);
         PageHelper.wrapCodeViewer(sourceOutput);
+        PageHelper.addCopyToClipboard(sourceOutput);
 
         let transpile = () => {
             let grinderHandler: HTMLElement = document.getElementById("grinder-handle");

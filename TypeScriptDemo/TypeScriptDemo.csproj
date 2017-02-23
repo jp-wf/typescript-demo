@@ -27,10 +27,16 @@
     <Content Include="example-source\my-first-typescript-app\index-2.html" />
     <Content Include="example-source\my-first-typescript-app\index.html" />
     <Content Include="img\aycabtu.png" />
+    <Content Include="img\brush-active.png" />
+    <Content Include="img\brush.png" />
     <Content Include="img\create_typescript_project.png" />
+    <Content Include="img\eraser-active.png" />
+    <Content Include="img\eraser.png" />
     <Content Include="img\fox.png" />
     <Content Include="img\gulp-text.png" />
     <Content Include="img\jasmine-logo.png" />
+    <Content Include="img\pencil-active.png" />
+    <Content Include="img\pencil.png" />
     <Content Include="img\pig.png" />
     <Content Include="img\sheep.png" />
     <Content Include="lib\highlightjs\highlight.min.js" />

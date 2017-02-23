@@ -52,7 +52,7 @@ export class PageTesting implements IPage {
     }
 
     run(callback: Function, reverse?: boolean): void {
-        this._internalIndex = (reverse || 0) ? 1 : 0;
+        this._internalIndex = (reverse || 0) ? 2 : 0;
         this._setSection();
         callback();
     }
@@ -61,7 +61,7 @@ export class PageTesting implements IPage {
         this._internalIndex++;
         this._setSection();
 
-        return this._internalIndex > 4;
+        return this._internalIndex > 2;
     }
 
     backward(): boolean {
@@ -86,6 +86,40 @@ export class PageTesting implements IPage {
             runner.contentWindow.location.reload();
         });        
     }
+
+    private _runPageOne(): void {
+        let sourceOutput: HTMLElement = document.getElementById("code-page-viewer-source");
+
+        let xhrSource = new XMLHttpRequest();
+        xhrSource.open("GET", "core/page-viewer.ts", true);
+        xhrSource.responseType = "text";
+        xhrSource.onload = function () {
+            if (xhrSource.status >= 200 && xhrSource.status < 300) {                
+                sourceOutput.innerText = xhrSource.responseText;
+                hljs.highlightBlock(sourceOutput);
+                PageHelper.wrapCodeViewer(sourceOutput);
+                PageHelper.addCopyToClipboard(sourceOutput);
+            }
+        };
+        xhrSource.send();
+    }
+
+    private _runPageTwo(): void {
+        let sourceOutput: HTMLElement = document.getElementById("code-page-viewer-spec-source");
+
+        let xhrSource = new XMLHttpRequest();
+        xhrSource.open("GET", "core/page-viewer.spec.ts", true);
+        xhrSource.responseType = "text";
+        xhrSource.onload = function () {
+            if (xhrSource.status >= 200 && xhrSource.status < 300) {
+                sourceOutput.innerText = xhrSource.responseText;
+                hljs.highlightBlock(sourceOutput);
+                PageHelper.wrapCodeViewer(sourceOutput);
+                PageHelper.addCopyToClipboard(sourceOutput);
+            }
+        };
+        xhrSource.send();
+    }
     
     private _setSection() {
         let sections: NodeListOf<Element> = document.querySelectorAll(".page-section");
@@ -93,7 +127,7 @@ export class PageTesting implements IPage {
             sections[i].classList.add("hidden");
         }
 
-        if (0 <= this._internalIndex && this._internalIndex <= 4) {
+        if (0 <= this._internalIndex && this._internalIndex <= 2) {
             let currentSection: Element = document.querySelector("#page-section-" + this._internalIndex);
             if (currentSection) {
                 currentSection.classList.remove("hidden");
@@ -101,10 +135,13 @@ export class PageTesting implements IPage {
 
             switch (this._internalIndex) {
                 case 0:
-                    this._runSpecRunner();
+                    this._runPageOne();
+                    break;
+                case 1:
+                    this._runPageTwo();
                     break;
                 case 2:
-                   // this._runOtherTooling();
+                    this._runSpecRunner();                   
                     break;
             }
         }

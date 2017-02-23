@@ -1,21 +1,62 @@
 ﻿<div class="page">
     <div id="page-section-0" class="page-section">
+        <h2>How TypeScript Enables Unit Testing</h2>
+        <p>
+            The modular nature of TypeScript allows for ease of setup when configuring unit tests for an application.  The object-oriented class layer and generic support enable solution designs where individuals components
+            can be isolated and tested.  Furthermore, this allows for simple mocking of dependencies and subsystems that would be otherwise hard to interact with.  Since the TypeScript is transpiled, you have an
+            extra layer of safety when developing your tests, just like you do when you're developing the application code itself.
+        </p>
+        <p>
+            An example of this modular nature is the PageViewer class that is driving this entire presentation.  This class manages the loading of page content and the navigation between the various pages.  It also reports state
+            back to the UI for displaying current Page Titles and Subtitles, as well as allowed navigation from the current page.  The code for this presentation's PageViewer class is shown below.
+        </p>
+        <table cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td width="*">
+                        <div class="code-header">TypeScript - page-viewer.ts</div>
+                        <div class="code-wrapper full">
+                            <code id="code-page-viewer-source" class="typescript">
+                            </code>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="page-section-1" class="page-section">
+        <h2>Writing Test Specs Using Jasmine</h2>
+        <p>
+            As mentioned earlier in the presentation, Jasmine is a JavaScript testing framework that works well for developing unit tests for front-end code.  The behavior-driven nature of Jasmine lends itself to
+            intuitive definition of unit tests.  Below is the test spec for the PageViewer class.  Since the type definition for Jasmine was imported, the test specs look almost identical to what they would look like in JavaScript.  
+            There are a couple exceptions such as the definition of functions using arrow notation and the import statements at the top of the test.  The test spec is transpiled into JavaScript before it is run through the test runner,
+            just like the application code.
+        </p>        
+        <p>
+            Jasmine includes a standalone test runner, which is embedded on the next page of the presentation.  This works well for visualization of test status while developing code and tests.  For automated testing, there are
+            a number of solutions that integrate with Jasmine.  Most notable is the test runner developed by Google that was used for Angular.  <a href="https://karma-runner.github.io/" target="_blank">Karma</a> allows
+            for the running of tests from several testing frameworks.  It supports both a visual mode and lights out operation.  It can be integrated with task runnner tools such as Grunt and Gulp. It also generates common output formats
+            that can provide build time status of unit tests including code coverage metrics.  These formats can be loaded and included with build status in products like <a href="https://jenkins.io/" target="_blank">Jenkins</a>.
+        </p>
+        <table cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td width="*">
+                        <div class="code-header">TypeScript - page-viewer.spec.ts</div>
+                        <div class="code-wrapper full">
+                            <code id="code-page-viewer-spec-source" class="typescript">
+                            </code>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="page-section-2" class="page-section">
         <h2>Jasmine Test Runner</h2>
         <div class="jasmine-container">
             <i title="Reload" class="fa fa-refresh reload-icon"></i>
             <iframe src="../testing/spec-runner.html" class="jasmine-frame"></iframe>
         </div>
-    </div>
-    <div id="page-section-1" class="page-section">
-        <h2>Reserved</h2>
-    </div>
-    <div id="page-section-2" class="page-section">
-        <h2>Reserved</h2>
-    </div>
-    <div id="page-section-3" class="page-section">
-        <h2>Reserved</h2>
-    </div>
-    <div id="page-section-4" class="page-section">
-        <h2>Reserved</h2>
     </div>
 </div>

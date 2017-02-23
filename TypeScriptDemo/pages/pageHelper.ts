@@ -52,6 +52,23 @@
     }
 
     export function addCopyToClipboard(element: HTMLElement) {
+        let entityMap = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;',
+            '/': '&#x2F;',
+            '`': '&#x60;',
+            '=': '&#x3D;'
+        };
+
+        let escapeHtml = (value: string) => {
+            return value.replace(/[&<>"'`=\/]/g, (s) => {
+                return entityMap[s];
+            });
+        };
+
         let parent: HTMLElement = element.parentElement;
 
         if (!parent.classList.contains("has-clipboard-icon")) {
@@ -62,11 +79,17 @@
             let iconNotification = document.createElement('i');
             iconNotification.classList.add("fa");
 
+            let copyAnchor = document.createElement("div");
+            copyAnchor.classList.add("copy-anchor");
+
             let copyIcon = document.createElement("i");
             copyIcon.classList.add("fa");
             copyIcon.classList.add("fa-clipboard");
             copyIcon.title = "Copy to clipboard";
-            copyIcon.addEventListener("click", () => {
+            copyIcon.addEventListener("click", (e: MouseEvent) => {
+                e.stopPropagation();
+                e.preventDefault();
+
                 let success = () => {
                     copyNotification.classList.remove("hidden");
                     copyNotification.innerText = "Copy Successful";
@@ -92,22 +115,27 @@
                     copyNotification.classList.remove("success");
                     copyNotification.classList.remove("error");
 
-                    var range = document.createRange();
-                    // add 'text' childNode of target element 
-                    range.selectNode(element.childNodes[0]);
+                    let range = document.createRange();
+                    // add 'text' childNode of target element
+                    let tempDiv = document.createElement("div");
+                    tempDiv.style.whiteSpace = "pre";
+                    tempDiv.innerHTML = escapeHtml(element.innerText);
+                    document.body.appendChild(tempDiv);
+                    range.selectNode(tempDiv.childNodes[0]);                    
                     window.getSelection().empty();
                     window.getSelection().addRange(range);
                     document.execCommand("copy");
                     window.getSelection().empty();
-
+                    tempDiv.remove();
                     success();
                 } catch (ex) {
                     failure();
                 }
             });
 
-            parent.appendChild(copyIcon);
-            parent.appendChild(copyNotification);
+            copyAnchor.appendChild(copyIcon);            
+            copyAnchor.appendChild(copyNotification);
+            parent.appendChild(copyAnchor);
             parent.classList.add("has-clipboard-icon");
         } else {
             let copyNotification = parent.querySelector(".copy-notification");
