@@ -91,10 +91,19 @@
             }
         }
 
-        call(): void {
+        protected renderCallBubble(call: string) {
             let callBubble = document.createElement("div");
             callBubble.classList.add("call-bubble");
-            callBubble.innerText = "...";
+            if (!this._isForward) {
+                callBubble.classList.add("reverse");
+            }
+            callBubble.innerText = call;
+            this._renderNode.appendChild(callBubble);
+            setTimeout(() => { callBubble.remove(); }, 3000);
+        }
+
+        call(): void {
+            this.renderCallBubble("...");
         }        
     }
 
@@ -106,14 +115,7 @@
         }
 
         call(): void {
-            let callBubble = document.createElement("div");
-            callBubble.classList.add("call-bubble");
-            if (!this._isForward) {
-                callBubble.classList.add("reverse");
-            }
-            callBubble.innerText = "Baaaa";
-            this._renderNode.appendChild(callBubble);
-            setTimeout(() => { callBubble.remove(); }, 3000);
+            this.renderCallBubble("Baaaaa");
         }
     }
 
@@ -125,14 +127,19 @@
         }
 
         call(): void {
-            let callBubble = document.createElement("div");
-            callBubble.classList.add("call-bubble");
-            if (!this._isForward) {
-                callBubble.classList.add("reverse");
-            }
-            callBubble.innerText = "Oink!";
-            this._renderNode.appendChild(callBubble);
-            setTimeout(() => { callBubble.remove(); }, 3000);
+            this.renderCallBubble("Oink!");
+        }
+    }
+
+    class Fox extends Animal {
+        constructor(field: HTMLElement, depth: number, id: string) {
+            super(field, depth, id);
+
+            this._renderNode.classList.add("fox");
+        }
+
+        call(): void {
+            this.renderCallBubble("Ringa-ding-ding-a-ding-a-ding-ding!");
         }
     }
 
@@ -142,7 +149,8 @@
         let field: HTMLElement = document.getElementById(targetId);
         if (field) {
             let sheep0 = new Sheep(field, 100, "sheep-0");
-            let sheep1 = new Sheep(field, 200, "sheep-1");
+            let pig0 = new Pig(field, 200, "pig-0");
+            let fox0 = new Fox(field, 150, "fox-0");
         }  
     }
 }

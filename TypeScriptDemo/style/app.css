@@ -84,6 +84,7 @@ ul {
     transform: translate3d(0,0,0);
     overflow: hidden;
     cursor: zoom-in;
+    position: relative;
 
 }
 
@@ -707,6 +708,7 @@ table {
     left: 50%;
     transform: translate(-50%, -50%);
     overflow: hidden;
+    z-index: -1;
 }
 
 .field-grass {
@@ -797,17 +799,55 @@ table {
 }
 
 .pig {
-    background: url(../img/pig.png);
-    background-size: 80px 60px;
-    background-repeat: no-repeat;
-    width: 80px;
-    height: 60px;
+    margin: 0;
+    padding: 0;
+    width: 160px;
+    height: 120px;
     display: block;
     position: absolute;
 }
 
+.pig .content {
+    background: url(../img/pig.png);
+    background-size: 160px 120px;
+    background-repeat: no-repeat;
+    width: 160px;
+    height: 120px;
+    display: block;
+    position: absolute;
+    transform: scaleX(-1);
+}
+
+.fox .content.reverse {
+    transform: scaleX(1);
+}
+
+.fox {
+    margin: 0;
+    padding: 0;
+    width: 160px;
+    height: 120px;
+    display: block;
+    position: absolute;
+}
+
+.fox .content {
+    background: url(../img/fox.png);
+    background-size: 160px 120px;
+    background-repeat: no-repeat;
+    width: 160px;
+    height: 120px;
+    display: block;
+    position: absolute;
+    transform: scaleX(-1);
+}
+
+.pig .content.reverse {
+    transform: scaleX(1);
+}
+
 .wolf {
-    background: url(../img/sheep.png);
+    background: url(../img/wolf.png);
     background-size: 80px 60px;
     background-repeat: no-repeat;
     width: 80px;
@@ -845,13 +885,14 @@ table {
     color: #333;
     display: inline-block;    
     position: absolute;
-    top: -30px;
+    top: -20px;
     right: -30px;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 1.5em;
 }
 
 .call-bubble.reverse {
     left: -30px;
     right: unset;
-    transform: translateX(50%);
+    transform: translateX(50%) translateY(-50%);
 }
