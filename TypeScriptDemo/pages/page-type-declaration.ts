@@ -153,13 +153,33 @@ export class PageTypeDeclaration implements IPage {
         let compiledOutput: HTMLElement = document.getElementById("code-adding-types-compiled");
         let sourceOutput: HTMLElement = document.getElementById("code-adding-types-source");
 
+        compiledOutput.classList.remove("rainbow-in");
+        sourceOutput.classList.remove("white-light-code");
+
         PageHelper.wrapCodeViewer(compiledOutput);        
         PageHelper.wrapCodeViewer(sourceOutput);
         PageHelper.addCopyToClipboard(sourceOutput);
 
-        let transpile = () => {      
-            compiledOutput.classList.remove("rainbow-in");            
-            sourceOutput.classList.remove("rainbow-out");
+        let transpilingInterval: number = null;
+        let lightInterval: number = null;
+        let transpile = () => {
+            if (transpilingInterval) {
+                clearTimeout(transpilingInterval);
+            }
+
+            if (lightInterval) {
+                clearTimeout(lightInterval);
+            }
+
+            compiledOutput.classList.remove("rainbow-in"); 
+            sourceOutput.classList.remove("white-light-code");
+
+            lightInterval = setTimeout(() => {
+                document.getElementById("prism-light").classList.add("active");
+                lightInterval = setTimeout(() => {
+                    document.getElementById("prism-light").classList.remove("active");
+                }, 1500);
+            }, 500);
 
             var sourceText = sourceOutput.innerText;
             sourceOutput.innerHTML = '';
@@ -173,13 +193,8 @@ export class PageTypeDeclaration implements IPage {
                 "purple"
             ];
 
-            var outputHTML = '';
-            var lines = sourceText.split('\n');
-            for (let i = 0; i < lines.length; i++) {
-                let cIdx = Math.min(Math.floor(i / 3),5);
-                outputHTML += "<span class=\"rainbow-code " + colorArray[cIdx] + " saturate\">" + lines[i] + "</span>";
-            }
-            sourceOutput.innerHTML = outputHTML;
+            sourceOutput.innerHTML = sourceText;
+            sourceOutput.classList.add("white-light-code");
 
             var xhrCompiled = new XMLHttpRequest();
             xhrCompiled.open("GET", "/example-source/adding-types.js", true);
@@ -189,16 +204,21 @@ export class PageTypeDeclaration implements IPage {
                     //compiledOutput.innerText = xhrCompiled.responseText;
 
                     var outputHTML = '';
-                    var lines = sourceText.split('\n');
+                    var lines = xhrCompiled.responseText.split('\n');
                     for (let i = 0; i < lines.length; i++) {
                         let cIdx = Math.min(Math.floor(i / 3), 5);
-                        outputHTML += "<span style=\"color: " + colorArray[cIdx] + ";\">" + lines[i] + "</span>\n";
+                        outputHTML += "<span style=\"color: " + colorArray[cIdx] + ";\">" + lines[i] + "</span>";
                     }
                     compiledOutput.innerHTML = outputHTML;
 
                     compiledOutput.classList.add("rainbow-in");
-                    sourceOutput.classList.add("rainbow-out");
-                   // hljs.highlightBlock(compiledOutput);
+                    sourceOutput.classList.add("white-light-code");
+
+                    transpilingInterval = setTimeout(() => {
+                        compiledOutput.innerHTML = compiledOutput.innerText;
+                        hljs.highlightBlock(compiledOutput);
+                        hljs.highlightBlock(sourceOutput);
+                    }, 3000);
                 }
             };
             xhrCompiled.send();
@@ -223,6 +243,13 @@ export class PageTypeDeclaration implements IPage {
         let transpileButton: HTMLElement = document.getElementById("adding-types-transpile");
         if (transpileButton) {
             transpileButton.addEventListener("click", (e) => {
+                transpile();
+            });
+        }
+
+        let transpileButton2: HTMLElement = document.getElementById("adding-types-transpile2");
+        if (transpileButton2) {
+            transpileButton2.addEventListener("click", (e) => {
                 transpile();
             });
         }

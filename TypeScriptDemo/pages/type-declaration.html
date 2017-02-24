@@ -5,55 +5,46 @@
             The key feature of TypeScript is the ability to decorate objects with Types.  In this example, we create a handler function and an XML Http Request.  When the request loads, the handler is invoked and a new window is opened.  
             The document content is retrieved and then written to the opened window.  The code below shows types being added to objects as well as types being used to define the signature of the handler function.
         </p>
-        <table cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td width="*">
-                        <div class="code-header">TypeScript</div>
-                        <div class="code-wrapper">
-                            <code id="code-adding-types-source" class="typescript">
-                            </code>
-                        </div>
-                    </td>
-                    <td width="120">
-                        <div class="rainbow-road">
-                            <div class="out-path">
-                                <div class="red"></div>
-                                <div class="orange"></div>
-                                <div class="yellow"></div>
-                                <div class="green"></div>
-                                <div class="blue"></div>
-                                <div class="purple"></div>
+        
+        <div class="dark-side-container">            
+            <table cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td width="*">
+                            <div class="code-header">TypeScript</div>
+                            <div class="code-wrapper no-right">
+                                <code id="code-adding-types-source" class="typescript">
+                                </code>
                             </div>
-                            <div class="center-path">
-                                <div class="red"></div>
-                                <div class="orange"></div>
-                                <div class="yellow"></div>
-                                <div class="green"></div>
-                                <div class="blue"></div>
-                                <div class="purple"></div>
+                        </td>
+                        <td width="120">
+                            <div class="prism-container">
+                               <!-- <div id="prism-light" class="prism-light">
+
+                                </div>-->
+                                <div id="adding-types-transpile" class="outer-prism">
+
+                                </div>
+                                <div id="adding-types-transpile2" class="inner-prism">
+
+                                </div>
+
                             </div>
-                            <div class="in-path">
-                                <div class="red"></div>
-                                <div class="orange"></div>
-                                <div class="yellow"></div>
-                                <div class="green"></div>
-                                <div class="blue"></div>
-                                <div class="purple"></div>
+                        </td>
+                        <td width="*">
+                            <div class="code-header">JavaScript</div>
+                            <div class="code-wrapper no-left">
+                                <code id="code-adding-types-compiled" class="javascript">
+                                </code>
                             </div>
-                            <input id="adding-types-transpile" type="button" value="Transpile ->" />
-                        </div>
-                    </td>
-                    <td width="*">
-                        <div class="code-header">JavaScript</div>
-                        <div class="code-wrapper">
-                            <code id="code-adding-types-compiled" class="javascript">
-                            </code>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="prism-light" class="prism-light">
+
+            </div>
+        </div>
         <br />
         <div id="adding-types-results" class="result-wrapper hidden">
             <h2>Transpiled Functionality</h2>
@@ -124,8 +115,8 @@
         <h2>Classes &amp; Inheritance</h2>
         <p>
             Arguably one of the greatest benefits of using TypeScript is the support of classes in the base syntax.  In JavaScript, inheritance-like behavior is possible via object prototypes, but it is certainly not a straight forward implementation.
-            The TypeScript implementation of classes should looke very familiar if you've ever worked with Java or C#.  In the example below, we define an Animal class.  We then implement two inherited classes via the "extends" syntax and override
-            the call method.  The resulting classes are then put to use in a simple demonstration.
+            The TypeScript implementation of classes should look very familiar if you've ever worked with Java or C#.  In the example below, we define an Animal class which contains some rendering funcationality and the move method.  It also implements 
+            a "call()" method that is then overridden in several inherited classes.  The inherited classes are defined via the "extends" syntax.  The resulting classes are then put to use in a simple demonstration.
         </p>
         <table cellpadding="0" cellspacing="0">
             <tbody>
@@ -165,8 +156,9 @@
     <div id="page-section-4" class="page-section">
         <h2>Generics &amp; Casting</h2>
         <p>
-            Much like current Java and C# syntax, TypeScript also support generics and type casting.  This allows a developer to apply functionality to an inconsistent or evolving object structure.  In this example, a new class is created and
-            we use a method that uses generics and casting to produce some rather nefarious results.
+            Much like current Java and C# syntax, TypeScript also supports generics and type casting.  This allows a developer to apply functionality to an inconsistent or evolving object structure.  In this example, a simple drawing program is created by creating several tools that each have a "use()" method.
+            The UI is then created such that a Button class which accepts a generic value in the constructor, is used to select which tool to work with on a canvas.  When a button is pressed, the associated generic tool is activated by casting it to the appropriate interface and then using it.  The use of generics here makes
+            it very easy to create a command pattern for this drawing example.  This feature is also useful when implementing factory patterns in an application.
         </p>
         <table cellpadding="0" cellspacing="0">
             <tbody>

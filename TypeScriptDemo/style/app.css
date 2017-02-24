@@ -245,6 +245,97 @@ code {
     }
 }
 
+.white-light-code {
+    transform-origin: left top;
+    transform-style: flat;
+    animation-name: white-light;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    transition-property: background-color;
+    transition-duration: 250ms;
+    transition-timing-function: ease-in;
+    background-color: #fff;
+}
+
+@keyframes white-light {
+    0% {
+        transform: translate(0px, 0px) scaleY(1.0);
+    }
+
+    25% {
+        transform: translate(0px, 130px) scaleY(0.02);
+    }
+
+    100% {
+        transform: translate(400px, 130px) scaleY(0.02);
+    }
+}
+
+.prism-container {
+    background: #333;
+    position: relative;
+    height: 280px;
+    width: 100%;
+    border: 1px solid #333;
+    top: 13px;
+    border-bottom: 0;
+    overflow: visible;
+}
+
+.no-right {
+    border-right: 0;
+}
+
+.no-left {
+    border-left: 0;
+}
+
+.dark-side-container {
+    display: block;
+    position: relative;
+}
+
+.outer-prism {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid white;
+    cursor: pointer;
+}
+
+.inner-prism {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% + 2px));
+    border-left: 45px solid transparent;
+    border-right: 45px solid transparent;
+    border-bottom: 90px solid #000;
+    cursor: pointer;
+}
+
+.prism-light {
+    position: absolute;
+    display: none;
+    height: 120px;
+    width: 120px;
+    background-image: url(/img/prism-light.png);
+    background-size: 120px 120px;
+    background-repeat: no-repeat;
+    top: 50%;
+    left: 50%;
+    transform: translate(calc(-50% + 10px), calc(-50% + 10px));
+}
+
+.prism-light.active {
+    display: block;
+}
+
 .rainbow-code {
     margin: 0;
     padding: 0;
@@ -253,75 +344,22 @@ code {
     background-color: #000;    
 }
 
-.rainbow-code.red {
-    color: #f00;
-}
-
-.rainbow-code.red.saturate {
-    transition: background-color 0.5s ease-in;
-    background-color: #f00;
-}
-
-.rainbow-code.orange {
-    color: #fa0;
-}
-
-.rainbow-code.orange.saturate {
-    transition: background-color 0.5s ease-in;
-    background-color: #fa0;
-}
-
-.rainbow-code.yellow {
-    color: #ff0;
-}
-
-.rainbow-code.yellow.saturate {
-    transition: background-color 0.5s ease-in;
-    background-color: #ff0;
-}
-
-.rainbow-code.green {
-    color: #4f3;
-}
-
-.rainbow-code.green.saturate {
-    transition: background-color 0.5s ease-in;
-    background-color: #4f3;
-}
-
-.rainbow-code.blue {
-    color: #15f;
-}
-
-.rainbow-code.blue.saturate {
-    transition: background-color 0.5s ease-in;
-    background-color: #15f;
-}
-
-.rainbow-code.purple {
-    color: #a0f;
-}
-
-.rainbow-code.purple.saturate {
-    transition: background-color 0.5s ease-in;
-    background-color: #a0f;
-}
-
 .rainbow-out {
     transform-origin: left top;
-    transform-style: flat;
+    transform-style: preserve-3d;
     animation-name: out-rainbow;
     animation-duration: 2s;
     animation-iteration-count: 1;
+    perspective: 1000px;
 }
 
 @keyframes out-rainbow {
     0%   {
-        transform: translate(0px, 0px);
+        transform: translate(0px, 0px) rotateY(-75deg);
     }
 
     100% {
-        transform: translate(calc(100% + 25px), 0px);
+        transform: translate(calc(100% + 25px), 0px) rotateY(0deg);
     }
 }
 
@@ -347,11 +385,11 @@ code {
 
 @keyframes in-rainbow {
     0%   {
-        transform: translate(calc(-100% - 25px), 0px);
+        transform: translate(calc(-100% - 25px), 130px) scaleY(0.1);
     }
 
     100% {
-        transform: translate(0px, 0px);      
+        transform: translate(0px, 0px) scaleY(1);      
     }
 }
 
@@ -950,6 +988,8 @@ table {
     height: 48px;
     background-repeat: no-repeat;
     background-size: 48px 48px;
+    z-index: 10;
+    cursor: pointer;
 }
 
 .pencil {

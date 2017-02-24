@@ -38,6 +38,7 @@
     <Content Include="img\pencil-active.png" />
     <Content Include="img\pencil.png" />
     <Content Include="img\pig.png" />
+    <Content Include="img\prism-light.png" />
     <Content Include="img\sheep.png" />
     <Content Include="lib\highlightjs\highlight.min.js" />
     <Content Include="pages\getting-started.html" />

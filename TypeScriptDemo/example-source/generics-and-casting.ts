@@ -12,12 +12,12 @@
         private _canvas: HTMLCanvasElement;
         private _currentTool: Tool;
         private _buttons: Array<IButton>;
-        private _downCount: number;
+        private _isUsing: boolean;
         private _toolbar: HTMLElement;
 
         constructor(canvas: HTMLCanvasElement) {
             this._canvas = canvas;
-            this._downCount = 0;
+            this._isUsing = false;
             this._currentTool = null;
             this._buttons = [];
 
@@ -26,7 +26,7 @@
             this._canvas.parentElement.appendChild(this._toolbar);
 
             this._canvas.addEventListener("mousedown", (e) => {
-                this._downCount++;
+                this._isUsing = true;
 
                 if (this._currentTool) {
                     this._currentTool.use(this._canvas.getContext("2d"), e.offsetX, e.offsetY);
@@ -34,11 +34,15 @@
             });
 
             this._canvas.addEventListener("mouseup", (e) => {
-                this._downCount--;
+                this._isUsing = false;
+            });
+
+            this._canvas.addEventListener("mouseout", (e) => {
+                this._isUsing = false;
             });
 
             this._canvas.addEventListener("mousemove", (e) => {
-                if (this._downCount > 0 && this._currentTool) {
+                if (this._isUsing && this._currentTool) {
                     this._currentTool.use(this._canvas.getContext("2d"), e.offsetX, e.offsetY);
                 }
             });
@@ -97,21 +101,17 @@
     class Pencil implements Tool {
         use(context: CanvasRenderingContext2D, x: number, y: number): void {
             context.beginPath();
-            context.arc(x, y, 10, 0, 2 * Math.PI);
+            context.arc(x, y, 5, 0, 2 * Math.PI);
             context.fillStyle = '#000';
             context.fill();
         }
     }
 
-    class Eraser implements Tool {
+    class Eraser implements Tool {        
         use(context: CanvasRenderingContext2D, x: number, y: number): void {
-            console.log("using eraser");
-            let gradient = context.createRadialGradient(x, y, 50, 20, 20, 5);
-            gradient.addColorStop(0, "transparent");
-            gradient.addColorStop(1, "green");
             context.beginPath();
             context.arc(x, y, 20, 0, 2 * Math.PI);
-            context.fillStyle = gradient;
+            context.fillStyle = '#fff';
             context.fill();
         }
     }
