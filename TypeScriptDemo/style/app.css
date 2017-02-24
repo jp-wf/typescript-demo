@@ -922,7 +922,7 @@ table {
     top: 50%;
     transform: translateY(-50%);
     position: absolute;
-    font-size: 20em;
+    font-size: 2.25em !important;
     text-align: center;
     color: #fff;
     text-shadow: 2px 2px 2px #000;
@@ -931,11 +931,11 @@ table {
 }
 
 .animal-move.left {
-    left: -5px;
+    left: -25px;
 }
 
 .animal-move.right {
-    right: -5px;
+    right: -25px;
 }
 
 .call-bubble {
@@ -1014,4 +1014,22 @@ table {
 
 .eraser.active {
     background-image: url(/img/eraser-active.png);
+}
+
+.footer-section {
+    position: fixed;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.5em;
+    color: #ccc;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.8);
+    bottom: 5px;
+    left: 5px;
+
+}
+
+.footer-section a {
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1.2em;
+    color: #fff;
 }
